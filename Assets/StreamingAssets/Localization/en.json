@@ -1,0 +1,7 @@
+{
+    "ErrorMessage": "Your PC ran into a problem and needs to restart. We're just\ncollecting some error info, and then we'll restart for you.",
+    "Percent": "{0}% complete",
+    "Tip1": "For more information about this issue and possible solutions, visit\nhttps://www.windows.com/stopcode",
+    "Tip2": "If you contact support, provide them with the following information:",
+    "StopCode": "Stop code: {0}"
+}

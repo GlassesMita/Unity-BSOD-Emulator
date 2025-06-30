@@ -84,15 +84,28 @@ public class LocalizationManager : MonoBehaviour
         string folderPath = localizationFolder;
         if (!folderPath.EndsWith("/")) folderPath += "/";
         string filePath = Path.Combine(folderPath, langCode + ".json");
+
+        // 1. 优先地区+语言（如 zh-CN.json）
+        // 2. 其次仅语言（如 zh.json）
+        // 3. 最后英文（en-US.json 或 en.json）
+
         if (!File.Exists(filePath))
         {
-            langCode = forceLanguage ? forcedLanguageCode : CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
-            filePath = Path.Combine(folderPath, langCode + ".json");
+            // 仅语言部分
+            string langOnly = langCode.Split('-')[0]; // zh-CN -> zh
+            filePath = Path.Combine(folderPath, langOnly + ".json");
+            if (!File.Exists(filePath))
+            {
+                // 尝试 en-US.json
+                filePath = Path.Combine(folderPath, "en-US.json");
+                if (!File.Exists(filePath))
+                {
+                    // 尝试 en.json
+                    filePath = Path.Combine(folderPath, "en.json");
+                }
+            }
         }
-        if (!File.Exists(filePath))
-        {
-            filePath = Path.Combine(folderPath, "en-US.json");
-        }
+
         if (File.Exists(filePath))
         {
             string json = File.ReadAllText(filePath);

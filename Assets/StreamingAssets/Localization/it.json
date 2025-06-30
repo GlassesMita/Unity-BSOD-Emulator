@@ -1,0 +1,7 @@
+{
+    "ErrorMessage": "Si è verificato un problema e il dispositivo deve essere riavviato.\nRaccolta di informazioni sull'errore in corso. Al termine il computer verrà riavviato automaticamente.",
+    "Percent": "{0}% completato",
+    "Tip1": "Per ulteriori informazioni su questo problema e possibili soluzioni, visitare\nhttps://www.windows.com/stopcode",
+    "Tip2": "Se si contatta il supporto, fornire le seguenti informazioni:",
+    "StopCode": "Codice di arresto: {0}"
+}
