@@ -961,6 +961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 300efb73242552c4aa115964318d8cae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  i: 1
   localizedTextEntries:
   - key: ErrorMessage
     text: {fileID: 115412799}
@@ -974,7 +975,7 @@ MonoBehaviour:
     text: {fileID: 652408512}
   localizationFolder: C:/Users/Mila/wkspaces/Unity BSOD Emulator/Assets/StreamingAssets/Localization
   forceLanguage: 0
-  forcedLanguageCode: pt-BR
+  forcedLanguageCode: en-US
 --- !u!114 &1190019449
 MonoBehaviour:
   m_ObjectHideFlags: 0

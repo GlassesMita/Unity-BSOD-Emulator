@@ -73,7 +73,25 @@ public class LocalizationManager : MonoBehaviour
     void LoadLocalization()
     {
         string langCode;
-        if (forceLanguage && !string.IsNullOrEmpty(forcedLanguageCode))
+
+        // 新增：检测 Application.dataPath 下 ForceLangCode 文件
+        string forceLangFile = Path.Combine(Application.dataPath, "ForceLangCode");
+        if (File.Exists(forceLangFile))
+        {
+            string fileLang = File.ReadAllText(forceLangFile).Trim();
+            if (!string.IsNullOrEmpty(fileLang))
+            {
+                langCode = fileLang;
+                Debug.Log($"[LocalizationManager] ForceLangCode detected, using: {langCode}");
+            }
+            else
+            {
+                langCode = forceLanguage && !string.IsNullOrEmpty(forcedLanguageCode)
+                    ? forcedLanguageCode
+                    : CultureInfo.CurrentCulture.Name;
+            }
+        }
+        else if (forceLanguage && !string.IsNullOrEmpty(forcedLanguageCode))
         {
             langCode = forcedLanguageCode;
         }
@@ -81,6 +99,7 @@ public class LocalizationManager : MonoBehaviour
         {
             langCode = CultureInfo.CurrentCulture.Name; // zh-CN, en-US
         }
+
         string folderPath = localizationFolder;
         if (!folderPath.EndsWith("/")) folderPath += "/";
         string filePath = Path.Combine(folderPath, langCode + ".json");
