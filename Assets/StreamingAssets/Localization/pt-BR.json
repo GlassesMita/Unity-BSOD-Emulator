@@ -1,0 +1,7 @@
+{
+    "ErrorMessage": "Ocorreu um problema e seu PC precisa ser reiniciado. Estamos coletando\nalgumas informações sobre o erro e, em seguida, reiniciaremos para você.",
+    "Percent": "{0}% completo",
+    "Tip1": "Para mais informações sobre este problema e possíveis soluções, visite\nhttps://www.windows.com/stopcode",
+    "Tip2": "Se você entrar em contato com o suporte, forneça as seguintes informações:",
+    "StopCode": "Código de parada: {0}"
+}

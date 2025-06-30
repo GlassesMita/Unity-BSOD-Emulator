@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # This .gitignore file should be placed at the root of your Unity project directory
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
@@ -47,6 +48,21 @@ ExportedObj/
 *.tmp
 *.user
 *.userprefs
+=======
+Library/
+Temp/
+Obj/
+Build/
+Builds/
+Logs/
+UserSettings/
+.vs/
+.idea/
+*.csproj
+*.unityproj
+*.sln
+*.user
+>>>>>>> 77e0228 (Initial Unity BSOD Emulator project)
 *.pidb
 *.booproj
 *.svd
@@ -54,6 +70,7 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
+<<<<<<< HEAD
 
 # Unity3D generated meta files
 *.pidb.meta
@@ -97,3 +114,13 @@ InitTestScene*.unity*
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+=======
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+*.opendb.meta
+*.VC.db.meta
+.DS_Store
+.vscode/
+
+>>>>>>> 77e0228 (Initial Unity BSOD Emulator project)
