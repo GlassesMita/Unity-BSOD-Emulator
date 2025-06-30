@@ -18,7 +18,7 @@ public class LocalizationManager : MonoBehaviour
     public int i = 1;
 
     public List<LocalizedTextEntry> localizedTextEntries; // Inspector 拖入所有需要本地化的 Text
-    public string localizationFolder = Application.streamingAssetsPath + "/Localization";
+    public string localizationFolder = @"/Localization";
     public Dictionary<string, string> localizedDict = new Dictionary<string, string>();
 
     public bool forceLanguage = false;
@@ -100,7 +100,7 @@ public class LocalizationManager : MonoBehaviour
             langCode = CultureInfo.CurrentCulture.Name; // zh-CN, en-US
         }
 
-        string folderPath = localizationFolder;
+        string folderPath = Application.streamingAssetsPath + localizationFolder;
         if (!folderPath.EndsWith("/")) folderPath += "/";
         string filePath = Path.Combine(folderPath, langCode + ".json");
 

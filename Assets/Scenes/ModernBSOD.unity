@@ -973,7 +973,7 @@ MonoBehaviour:
     text: {fileID: 703473608}
   - key: StopCode
     text: {fileID: 652408512}
-  localizationFolder: C:/Users/Mila/wkspaces/Unity BSOD Emulator/Assets/StreamingAssets/Localization
+  localizationFolder: /Localization
   forceLanguage: 0
   forcedLanguageCode: en-US
 --- !u!114 &1190019449
