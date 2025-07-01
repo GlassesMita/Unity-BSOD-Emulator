@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI; // 添加对 UI 的支持
+using System.Collections;
 
 public class DelaySceneLoader : MonoBehaviour
 {
@@ -35,6 +36,32 @@ public class DelaySceneLoader : MonoBehaviour
 
     void LoadTargetScene()
     {
+        // 模拟黑屏一秒
+        StartCoroutine(BlackScreenAndLoad());
+    }
+
+    private IEnumerator BlackScreenAndLoad()
+    {
+        // 创建一个全屏黑色UI（如有可用Canvas，否则可自行实现）
+        GameObject blackScreen = new GameObject("BlackScreen");
+        var canvas = FindObjectOfType<Canvas>();
+        if (canvas == null)
+        {
+            canvas = new GameObject("Canvas", typeof(Canvas)).GetComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        }
+        blackScreen.transform.SetParent(canvas.transform, false);
+        var image = blackScreen.AddComponent<UnityEngine.UI.Image>();
+        image.color = Color.black;
+        image.rectTransform.anchorMin = Vector2.zero;
+        image.rectTransform.anchorMax = Vector2.one;
+        image.rectTransform.offsetMin = Vector2.zero;
+        image.rectTransform.offsetMax = Vector2.zero;
+
+        // 等待一秒
+        yield return new WaitForSeconds(1f);
+
+        // 加载目标场景
         SceneManager.LoadScene(targetSceneName);
     }
 }

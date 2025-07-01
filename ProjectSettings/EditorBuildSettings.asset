@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ModernBSODWithReboot.unity
     guid: cee97dc93e96fae48bdc6b6b0824cebe
+  - enabled: 1
+    path: Assets/Scenes/RetroBSOD.unity
+    guid: 708dfed82919c50459ad5751df70cd7d
   m_configObjects: {}

@@ -42,9 +42,9 @@ public class LocalizationManager : MonoBehaviour
         }
     }
 
-    public void SetRandomStopCode(Text text)
+    public void SetRandomStopCode(Text text, bool win7 = false)
     {
-        string stopCode = Enums.GetRandomStopCode();
+        string stopCode = Enums.GetRandomStopCode(win7);
         SetText("StopCode", text, stopCode);
     }
 
@@ -53,7 +53,7 @@ public class LocalizationManager : MonoBehaviour
         foreach (var entry in localizedTextEntries)
         {
             if (entry.key == "StopCode")
-                SetRandomStopCode(entry.text);
+                SetRandomStopCode(entry.text); // 如需区分 Win7 可传 true
             else if (entry.key == "Percent")
                 StartCoroutine(UpdatePercent(entry.text));
             else
@@ -63,6 +63,7 @@ public class LocalizationManager : MonoBehaviour
 
     private IEnumerator UpdatePercent(Text percentText)
     {
+        if (percentText == null) yield break;
         for (i = 0; i <= 100; i++)
         {
             SetText("Percent", percentText, i);
@@ -73,23 +74,11 @@ public class LocalizationManager : MonoBehaviour
     void LoadLocalization()
     {
         string langCode;
-
-        // 新增：检测 Application.dataPath 下 ForceLangCode 文件
         string forceLangFile = Path.Combine(Application.dataPath, "ForceLangCode");
         if (File.Exists(forceLangFile))
         {
             string fileLang = File.ReadAllText(forceLangFile).Trim();
-            if (!string.IsNullOrEmpty(fileLang))
-            {
-                langCode = fileLang;
-                Debug.Log($"[LocalizationManager] ForceLangCode detected, using: {langCode}");
-            }
-            else
-            {
-                langCode = forceLanguage && !string.IsNullOrEmpty(forcedLanguageCode)
-                    ? forcedLanguageCode
-                    : CultureInfo.CurrentCulture.Name;
-            }
+            langCode = !string.IsNullOrEmpty(fileLang) ? fileLang : (forceLanguage && !string.IsNullOrEmpty(forcedLanguageCode) ? forcedLanguageCode : CultureInfo.CurrentCulture.Name);
         }
         else if (forceLanguage && !string.IsNullOrEmpty(forcedLanguageCode))
         {
@@ -97,34 +86,24 @@ public class LocalizationManager : MonoBehaviour
         }
         else
         {
-            langCode = CultureInfo.CurrentCulture.Name; // zh-CN, en-US
+            langCode = CultureInfo.CurrentCulture.Name;
         }
-
         string folderPath = Application.streamingAssetsPath + localizationFolder;
         if (!folderPath.EndsWith("/")) folderPath += "/";
         string filePath = Path.Combine(folderPath, langCode + ".json");
-
-        // 1. 优先地区+语言（如 zh-CN.json）
-        // 2. 其次仅语言（如 zh.json）
-        // 3. 最后英文（en-US.json 或 en.json）
-
         if (!File.Exists(filePath))
         {
-            // 仅语言部分
-            string langOnly = langCode.Split('-')[0]; // zh-CN -> zh
+            string langOnly = langCode.Split('-')[0];
             filePath = Path.Combine(folderPath, langOnly + ".json");
             if (!File.Exists(filePath))
             {
-                // 尝试 en-US.json
                 filePath = Path.Combine(folderPath, "en-US.json");
                 if (!File.Exists(filePath))
                 {
-                    // 尝试 en.json
                     filePath = Path.Combine(folderPath, "en.json");
                 }
             }
         }
-
         if (File.Exists(filePath))
         {
             string json = File.ReadAllText(filePath);

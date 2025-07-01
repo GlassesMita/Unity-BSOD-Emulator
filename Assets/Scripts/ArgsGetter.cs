@@ -10,11 +10,21 @@ public class ArgsGetter : MonoBehaviour
     {
         string[] args = System.Environment.GetCommandLineArgs();
         bool withReboot = false;
+        bool retro = false;
         foreach (var arg in args)
         {
             if (arg == "--with-reboot") withReboot = true;
+            if (arg == "--retro") retro = true;
         }
-        string sceneName = withReboot ? "ModernBSODWithReboot" : "ModernBSOD";
+        string sceneName;
+        if (retro)
+        {
+            sceneName = "RetroBSOD";
+        }
+        else
+        {
+            sceneName = withReboot ? "ModernBSODWithReboot" : "ModernBSOD";
+        }
         SceneManager.LoadScene(sceneName);
     }
 

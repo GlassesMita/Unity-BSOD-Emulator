@@ -54,6 +54,24 @@ public class PercentSceneLoader : MonoBehaviour
 
     IEnumerator LoadNextSceneAfterDelay()
     {
+        // 黑屏一秒
+        GameObject blackScreen = new GameObject("BlackScreen");
+        var canvas = FindObjectOfType<Canvas>();
+        if (canvas == null)
+        {
+            canvas = new GameObject("Canvas", typeof(Canvas)).GetComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        }
+        blackScreen.transform.SetParent(canvas.transform, false);
+        var image = blackScreen.AddComponent<UnityEngine.UI.Image>();
+        image.color = Color.black;
+        image.rectTransform.anchorMin = Vector2.zero;
+        image.rectTransform.anchorMax = Vector2.one;
+        image.rectTransform.offsetMin = Vector2.zero;
+        image.rectTransform.offsetMax = Vector2.zero;
+
+        yield return new WaitForSeconds(1f);
+
         yield return new WaitForSeconds(waitAfterFull);
         SceneManager.LoadScene(nextSceneName);
     }
